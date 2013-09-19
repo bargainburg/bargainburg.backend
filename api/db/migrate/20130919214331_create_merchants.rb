@@ -9,6 +9,7 @@ class CreateMerchants < ActiveRecord::Migration
       t.string :description
       t.boolean :approved
       t.integer :price_range
+	  t.integer :category_id
 
       t.timestamps
     end

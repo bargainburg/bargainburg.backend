@@ -8,6 +8,8 @@ class CreateCoupons < ActiveRecord::Migration
       t.string :image
       t.boolean :hidden
       t.string :name
+	  t.integer :category_id
+	  t.integer :merchant_id
 
       t.timestamps
     end
