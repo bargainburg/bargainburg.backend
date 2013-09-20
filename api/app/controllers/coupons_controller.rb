@@ -7,8 +7,6 @@ class CouponsController < ApplicationController
 	else
 		@coupons = Coupon.all
 	end
-    #@coupons = params[:merchant_id].present? ? Coupon.find_by merchant_id: params[:merchant_id] :  Coupon.all
-	#@coupons = Coupon.all
 
     render json: @coupons
   end
