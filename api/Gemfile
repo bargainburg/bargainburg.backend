@@ -6,7 +6,11 @@ gem 'rails', '4.0.0'
 gem 'rails-api'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+if RUBY_PLATFORM =~ /win32/
+	gem 'sqlite3', :platform => [:mswin, :mingw]
+else
+	gem 'sqlite3'
+end
 
 group :development do
 	gem 'populator'
