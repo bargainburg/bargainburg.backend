@@ -2,7 +2,13 @@ class CouponsController < ApplicationController
   # GET /coupons
   # GET /coupons.json
   def index
-    @coupons = Coupon.all
+	if params[:merchant_id].present?
+		@coupons = Coupon.where(:merchant_id => params[:merchant_id])
+	else
+		@coupons = Coupon.all
+	end
+    #@coupons = params[:merchant_id].present? ? Coupon.find_by merchant_id: params[:merchant_id] :  Coupon.all
+	#@coupons = Coupon.all
 
     render json: @coupons
   end
