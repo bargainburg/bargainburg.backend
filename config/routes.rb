@@ -1,9 +1,11 @@
 Api::Application.routes.draw do
-  resources :categories, except: [:new, :edit, :destroy]
-  resources :merchants, only: [:index, :show, :create, :update] do
-	  resources :coupons, only: [:index]
+  scope '/v1' do
+	resources :categories, except: [:new, :edit, :destroy]
+	resources :merchants, only: [:index, :show, :create, :update] do
+		resources :coupons, only: [:index]
+	end
+	resources :coupons, only: [:index, :show, :create, :update]
   end
-  resources :coupons, only: [:index, :show, :create, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
