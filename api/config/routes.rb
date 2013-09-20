@@ -1,4 +1,5 @@
 Api::Application.routes.draw do
+  resources :point_of_contacts, except: [:new, :edit]
   resources :categories, except: [:new, :edit]
   resources :merchants, except: [:new, :edit]
   resources :coupons, except: [:new, :edit]
