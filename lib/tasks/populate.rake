@@ -33,10 +33,10 @@ namespace :db do
 			end
 
 			PointOfContact.populate 2 do |poc|
-			  POC.name	= Faker::Name.name
-			  POC.password  = 1234567890
-			  POC.phone	= Faker::PhoneNumber.phone_number
-			  POC.email	= Faker::Internet.email
+			  poc.name	= Faker::Name.name
+			  poc.password  = 1234567890
+			  poc.phone	= Faker::PhoneNumber.phone_number
+			  poc.email	= Faker::Internet.email
 			end
 		end
     end
