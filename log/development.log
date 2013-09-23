@@ -1,0 +1,23 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePointOfContacts (20130923201228)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "point_of_contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "password" varchar(255), "email" varchar(255), "phone" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20130923201228"]]
+  [1m[36m (6.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mSQL (28.3ms)[0m  [1mDELETE FROM "categories"[0m
+  [1m[35mSQL (21.0ms)[0m  DELETE FROM "merchants"
+  [1m[36mSQL (13.1ms)[0m  [1mDELETE FROM "coupons"[0m
+  [1m[35mSQL (12.0ms)[0m  DELETE FROM "point_of_contacts"
+  [1m[36mCategory Last ID (0.0ms)[0m  [1mSELECT id FROM "categories" ORDER BY id DESC[0m
+  [1m[35mMerchant Last ID (1.0ms)[0m  SELECT id FROM "merchants" ORDER BY id DESC
+  [1m[36mCoupon Last ID (0.0ms)[0m  [1mSELECT id FROM "coupons" ORDER BY id DESC[0m
+  [1m[35mPointOfContact Last ID (0.0ms)[0m  SELECT id FROM "point_of_contacts" ORDER BY id DESC
