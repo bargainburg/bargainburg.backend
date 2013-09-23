@@ -1,4 +1,5 @@
 Api::Application.routes.draw do
+  resources :point_of_contacts, except: [:new, :edit]
   scope '/v1' do
 	resources :categories, except: [:new, :edit, :destroy]
 	resources :merchants, only: [:index, :show, :create, :update] do
