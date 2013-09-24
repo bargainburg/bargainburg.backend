@@ -37,6 +37,7 @@ namespace :db do
 			  poc.password  = 1234567890
 			  poc.phone	= Faker::PhoneNumber.phone_number
 			  poc.email	= Faker::Internet.email
+			  poc.merchant_id = merchant.id
 			end
 		end
     end

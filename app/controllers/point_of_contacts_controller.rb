@@ -2,7 +2,11 @@ class PointOfContactsController < ApplicationController
   # GET /point_of_contacts
   # GET /point_of_contacts.json
   def index
-    @point_of_contacts = PointOfContact.all
+	if params[:merchant_id].present?
+		@point_of_contacts = PointOfContact.where(:merchant_id => params[:merchant_id])
+	else
+		@point_of_contacts = PointOfContact.all
+	end
 
     render json: @point_of_contacts
   end
