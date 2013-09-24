@@ -2,7 +2,13 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+	p params
+	if (params[:expand_merchants].present?) && (params[:expand_merchants] == "1")
+		@categories = Category.includes(:merchants).as_json(:include => { merchants: {only: [:name, :id]}})
+		p @categories
+	else
+		@categories = Category.all
+	end
 
     render json: @categories
   end
