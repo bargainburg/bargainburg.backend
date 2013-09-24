@@ -4,7 +4,9 @@ class CategoriesController < ApplicationController
   def index
 	p params
 	if (params[:expand_merchants].present?) && (params[:expand_merchants] == "1")
-		@categories = Category.includes(:merchants).as_json(:include => { merchants: {only: [:name, :id]}})
+		# this line may need to be edited in the futute to remove the to_json
+		# so that changes can be made after this if statement but before the render
+		@categories = Category.includes(:merchants).to_json(:include => { merchants: {only: [:name, :id]}})
 		p @categories
 	else
 		@categories = Category.all
