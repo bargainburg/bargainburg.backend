@@ -4,7 +4,7 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [Category, Merchant, Coupon].each(&:delete_all)
+    [Category, Merchant, Coupon, PointOfContact].each(&:delete_all)
     
     Category.populate 4 do |category|
       category.name = Populator.words(1..3).titleize
@@ -30,6 +30,14 @@ namespace :db do
 			  coupon.hidden = [true,false]
 			  coupon.category_id = category.id
 			  coupon.merchant_id = merchant.id
+			end
+
+			PointOfContact.populate 2 do |poc|
+			  poc.name	= Faker::Name.name
+			  poc.password  = 1234567890
+			  poc.phone	= Faker::PhoneNumber.phone_number
+			  poc.email	= Faker::Internet.email
+			  poc.merchant_id = merchant.id
 			end
 		end
     end

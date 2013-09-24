@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130919214354) do
+ActiveRecord::Schema.define(version: 20130924182458) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20130919214354) do
     t.string   "image"
     t.boolean  "hidden"
     t.string   "name"
-    t.integer  "category_id"
-    t.integer  "merchant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
+    t.integer  "merchant_id"
   end
 
   create_table "merchants", force: true do |t|
@@ -42,9 +42,19 @@ ActiveRecord::Schema.define(version: 20130919214354) do
     t.string   "description"
     t.boolean  "approved"
     t.integer  "price_range"
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
+  end
+
+  create_table "point_of_contacts", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "merchant_id"
   end
 
 end
