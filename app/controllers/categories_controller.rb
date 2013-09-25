@@ -12,15 +12,25 @@ class CategoriesController < ApplicationController
 		@categories = Category.all
 	end
 
-    render json: @categories
+	if (params[:callback].present?)
+		render json: @categories, callback: params[:callback]
+	else
+		render json: @categories
+	end
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+	p params
+	p params[:id]
     @category = Category.find(params[:id])
 
-    render json: @category
+	if (params[:callback].present?)
+		render json: @categories, callback: params[:callback]
+	else
+		render json: @categories
+	end
   end
 
   # POST /categories

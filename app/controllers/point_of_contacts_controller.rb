@@ -8,7 +8,13 @@ class PointOfContactsController < ApplicationController
 		@point_of_contacts = PointOfContact.all
 	end
 
-    render json: @point_of_contacts
+    #render json: @point_of_contacts
+	
+	if (params[:callback].present?)
+		render json: @point_of_contacts, callback: params[:callback]
+	else
+		render json: @point_of_contacts
+	end
   end
 
   # GET /point_of_contacts/1
@@ -16,7 +22,13 @@ class PointOfContactsController < ApplicationController
   def show
     @point_of_contact = PointOfContact.find(params[:id])
 
-    render json: @point_of_contact
+    #render json: @point_of_contact
+
+	if (params[:callback].present?)
+		render json: @point_of_contacts, callback: params[:callback]
+	else
+		render json: @point_of_contacts
+	end
   end
 
   # POST /point_of_contacts
