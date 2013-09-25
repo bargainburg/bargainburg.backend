@@ -8,7 +8,11 @@ class CouponsController < ApplicationController
 		@coupons = Coupon.all
 	end
 
-    render json: @coupons
+	if (params[:callback].present?)
+		render json: @coupons, callback: params[:callback]
+	else
+		render json: @coupons
+	end
   end
 
   # GET /coupons/1
@@ -16,7 +20,11 @@ class CouponsController < ApplicationController
   def show
     @coupon = Coupon.find(params[:id])
 
-    render json: @coupon
+	if (params[:callback].present?)
+		render json: @coupon, callback: params[:callback]
+	else
+		render json: @coupon
+	end
   end
 
   # POST /coupons

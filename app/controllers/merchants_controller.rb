@@ -4,7 +4,11 @@ class MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
 
-    render json: @merchants
+	if (params[:callback].present?)
+		render json: @merchants, callback: params[:callback]
+	else
+		render json: @merchants
+	end
   end
 
   # GET /merchants/1
@@ -12,7 +16,11 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
 
-    render json: @merchant
+	if (params[:callback].present?)
+		render json: @merchant, callback: params[:callback]
+	else
+		render json: @merchant
+	end
   end
 
   # POST /merchants
