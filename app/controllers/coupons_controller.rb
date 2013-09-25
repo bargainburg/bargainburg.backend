@@ -8,8 +8,6 @@ class CouponsController < ApplicationController
 		@coupons = Coupon.all
 	end
 
-    #render json: @coupons
-	
 	if (params[:callback].present?)
 		render json: @coupons, callback: params[:callback]
 	else
@@ -22,12 +20,10 @@ class CouponsController < ApplicationController
   def show
     @coupon = Coupon.find(params[:id])
 
-    #render json: @coupon
-
 	if (params[:callback].present?)
-		render json: @coupons, callback: params[:callback]
+		render json: @coupon, callback: params[:callback]
 	else
-		render json: @coupons
+		render json: @coupon
 	end
   end
 

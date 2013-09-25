@@ -2,12 +2,10 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-	p params
 	if (params[:expand_merchants].present?) && (params[:expand_merchants] == "1")
 		# this line may need to be edited in the futute to remove the to_json
 		# so that changes can be made after this if statement but before the render
 		@categories = Category.includes(:merchants).to_json(:include => { merchants: {only: [:name, :id]}})
-		p @categories
 	else
 		@categories = Category.all
 	end
@@ -22,14 +20,12 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-	p params
-	p params[:id]
     @category = Category.find(params[:id])
 
 	if (params[:callback].present?)
-		render json: @categories, callback: params[:callback]
+		render json: @category, callback: params[:callback]
 	else
-		render json: @categories
+		render json: @category
 	end
   end
 
