@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  before_action :require_authentication, :only => [:index, :create, :update, :destroy]
+
   # GET /categories
   # GET /categories.json
   def index
