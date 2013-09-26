@@ -1,20 +1,24 @@
 class ApplicationController < ActionController::API
 
   include ActionController::HttpAuthentication::Basic::ControllerMethods
+  include CanCan::ControllerAdditions
+
+  check_authorization
 
   protected
 
   def current_user
-    if user = authenticate_or_request_with_http_basic {|e, p| auth(e, p) }
+    if user = authenticate_with_http_basic {|e, p| auth(e, p) }
       return user
     else
       return nil
     end
   end
 
-  def require_authentication
-    head :unauthorized if current_user.nil?
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: exception.message.to_json, status: :unauthorized, callback: params[:callback]
   end
+
 
   private
   def auth(e, p)
