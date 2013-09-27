@@ -16,6 +16,10 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
 
+    if params[:expand_coupons] == '1'
+      @merchant = @merchant.as_json(:include => :coupons)
+    end
+
 	if (params[:callback].present?)
 		render json: @merchant, callback: params[:callback]
 	else
