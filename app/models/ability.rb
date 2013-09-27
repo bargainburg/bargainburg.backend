@@ -4,12 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    cannot :read, Coupon
     can :read, Coupon, :hidden => false
 
     can :read, Category
 
-    cannot :read, Merchant
     can :read, Merchant, :approved => true
 
     if user.persisted?
