@@ -2,7 +2,7 @@ class MerchantsController < ApplicationController
   # GET /merchants
   # GET /merchants.json
   def index
-    @merchants = Merchant.all
+    @merchants = Merchant.order("name ASC") #order the merchants in alphabetical order
 
 	if (params[:callback].present?)
 		render json: @merchants, callback: params[:callback]
