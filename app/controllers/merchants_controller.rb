@@ -2,7 +2,11 @@ class MerchantsController < ApplicationController
   # GET /merchants
   # GET /merchants.json
   def index
-    @merchants = Merchant.all
+    if params[:category_id].present?
+		@merchants = Merchant.where(:category_id => params[:category_id]).order("name ASC")
+	else
+		@merchants = Merchant.order("name ASC")
+	end
 
 	if (params[:callback].present?)
 		render json: @merchants, callback: params[:callback]
