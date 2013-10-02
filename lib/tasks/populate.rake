@@ -24,7 +24,6 @@ namespace :db do
 			  coupon.name    = Faker::Name.name
 			  coupon.begin_date = 2.month.ago..1.month.ago
 			  coupon.end_date = 1.month.ago..Time.now
-			  coupon.created_date = Time.now
 			  coupon.description = Populator.sentences(2..10)
 			  coupon.hidden = [true,false]
 			  coupon.category_id = category.id
