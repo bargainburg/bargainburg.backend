@@ -3,9 +3,9 @@ class CouponsController < ApplicationController
   # GET /coupons.json
   def index
 	if params[:merchant_id].present?
-		@coupons = Coupon.where(:merchant_id => params[:merchant_id])
+		@coupons = Coupon.where(:merchant_id => params[:merchant_id]).where("end_date >= ?", DateTime.now)
 	else
-		@coupons = Coupon.all
+		@coupons = Coupon.where("end_date >= ?", DateTime.now)
 	end
 
 	if (params[:callback].present?)
