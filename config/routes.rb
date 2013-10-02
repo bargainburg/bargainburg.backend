@@ -8,6 +8,7 @@ Api::Application.routes.draw do
 		resources :point_of_contacts, only: [:index]
 	end
 	resources :coupons, only: [:index, :show, :create, :update]
+	resources :search, only: [:index]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
