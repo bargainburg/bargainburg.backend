@@ -7,6 +7,8 @@ class Ability
     can :read, Coupon, :hidden => false
 
     can :read, Category
+	
+	can :read, PointOfContact
 
     can :read, Merchant, :approved => true
 
