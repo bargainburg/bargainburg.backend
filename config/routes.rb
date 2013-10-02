@@ -9,6 +9,8 @@ Api::Application.routes.draw do
 	end
 	resources :coupons, only: [:index, :show, :create, :update]
 	resources :search, only: [:index]
+  post 'login', to: 'user_sessions#create'
+  post 'logout', to: 'user_sessions#destroy'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
