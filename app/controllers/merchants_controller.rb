@@ -20,7 +20,6 @@ class MerchantsController < ApplicationController
   # GET /merchants/1
   # GET /merchants/1.json
   def show
-    @merchant = Merchant.find(params[:id])
 
 	if (params[:callback].present?)
 		render json: @merchant, callback: params[:callback]
@@ -32,7 +31,6 @@ class MerchantsController < ApplicationController
   # POST /merchants
   # POST /merchants.json
   def create
-    @merchant = Merchant.new(params[:merchant])
 
     if @merchant.save
       render json: @merchant, status: :created, location: @merchant
@@ -44,7 +42,6 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
-    @merchant = Merchant.find(params[:id])
 
     if @merchant.update(params[:merchant])
       head :no_content
@@ -56,7 +53,7 @@ class MerchantsController < ApplicationController
   # DELETE /merchants/1
   # DELETE /merchants/1.json
   def destroy
-    @merchant = Merchant.find(params[:id])
+
     @merchant.destroy
 
     head :no_content

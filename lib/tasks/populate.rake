@@ -24,9 +24,7 @@ namespace :db do
 			  coupon.name    = Faker::Name.name
 			  coupon.begin_date = 2.month.ago..1.month.ago
 			  coupon.end_date = 1.month.ago..Time.now
-			  coupon.created_date = Time.now
 			  coupon.description = Populator.sentences(2..10)
-			  coupon.image = "Path/To/File/image.png"
 			  coupon.hidden = [true,false]
 			  coupon.category_id = category.id
 			  coupon.merchant_id = merchant.id
@@ -34,7 +32,6 @@ namespace :db do
 
 			PointOfContact.populate 2 do |poc|
 			  poc.name	= Faker::Name.name
-			  poc.password  = 1234567890
 			  poc.phone	= Faker::PhoneNumber.phone_number
 			  poc.email	= Faker::Internet.email
 			  poc.merchant_id = merchant.id
