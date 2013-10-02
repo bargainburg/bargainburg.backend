@@ -1,4 +1,6 @@
 class PointOfContactsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /point_of_contacts
   # GET /point_of_contacts.json
   def index
