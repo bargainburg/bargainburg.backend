@@ -17,3 +17,4 @@
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
 Api::Application.config.secret_token = '6abb6cc32c346a89f93e19c89e43600489fabcca7a62f3ca444eaf5b1657d71ca62379a6794a93b95f07160a690c272bbe834743a3e14de56845a0fe2bf0b5f7'
+Api::Application.config.session_store :cookie_store, :key => '_bargainsburg_api'
