@@ -26,7 +26,6 @@ namespace :db do
 			  coupon.end_date = 1.month.ago..Time.now
 			  coupon.created_date = Time.now
 			  coupon.description = Populator.sentences(2..10)
-			  coupon.image = "Path/To/File/image.png"
 			  coupon.hidden = [true,false]
 			  coupon.category_id = category.id
 			  coupon.merchant_id = merchant.id

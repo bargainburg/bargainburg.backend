@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', github: 'rails/rails', branch: '4-0-stable'
 
 gem 'rails-api'
+gem 'paperclip', "~> 3.0"
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'cancan'
 gem "rolify"

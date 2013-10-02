@@ -56,7 +56,11 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    climate_control (0.0.3)
     cancan (1.6.10)
+      activesupport (>= 3.0)
+    cocaine (0.5.2)
+      climate_control (>= 0.0.3, < 1.0)
     erubis (2.7.0)
     faker (1.2.0)
       i18n (~> 0.5)
@@ -68,6 +72,11 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
+    paperclip (3.5.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.0)
+      mime-types
     polyglot (0.3.3)
     populator (1.0.0)
     rack (1.5.2)
@@ -106,6 +115,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   cancan
   faker
+  paperclip (~> 3.0)
   populator
   rails!
   rails-api

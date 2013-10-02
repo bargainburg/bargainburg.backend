@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20131002000330) do
     t.datetime "begin_date"
     t.datetime "end_date"
     t.string   "description"
-    t.string   "image"
     t.boolean  "hidden"
     t.string   "name"
     t.datetime "created_at"
