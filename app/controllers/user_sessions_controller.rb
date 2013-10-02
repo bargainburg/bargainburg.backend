@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       render json: {:user_id => @user_session.user.id, :merchant_id => @user_session.user.merchant.id}, callback: params[:callback]
     else
-      head :not_found
+      head :bad_request
     end
   end
 
