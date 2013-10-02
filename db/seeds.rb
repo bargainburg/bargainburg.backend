@@ -7,7 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
-# Authorization: Basic dGVzdDp0ZXN0MTIz==
 m = Merchant.find(1)
 m.user = u
 m.save

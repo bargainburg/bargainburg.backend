@@ -1,27 +1,28 @@
 class ApplicationController < ActionController::API
 
   include ActionController::HttpAuthentication::Basic::ControllerMethods
+  include ActionController::Cookies
   include CanCan::ControllerAdditions
 
   check_authorization
 
-  protected
+
+  helper_method :current_user_session, :current_user
+
+  private
 
   def current_user
-    if user = authenticate_with_http_basic {|e, p| auth(e, p) }
-      return user
-    else
-      return nil
-    end
+    return @current_user if defined?(@current_user)
+    @current_user = current_user_session && current_user_session.user
+  end
+
+  def current_user_session
+    return @current_user_session if defined?(@current_user_session)
+    @current_user_session = UserSession.find
   end
 
   rescue_from CanCan::AccessDenied do |exception|
     render json: exception.message.to_json, status: :unauthorized, callback: params[:callback]
   end
 
-
-  private
-  def auth(e, p)
-    User.find_by_email(e).authenticate(p)
-  end
 end

@@ -9,6 +9,10 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'cancan'
 gem "rolify"
 
+gem 'authlogic', :github => 'tylerkahn/authlogic'
+# needed to work with rails-api
+# see: http://git.io/3h4-Jg
+
 # Use sqlite3 as the database for Active Record
 if RUBY_PLATFORM =~ /win32/
 	gem 'sqlite3', :platform => [:mswin, :mingw]
