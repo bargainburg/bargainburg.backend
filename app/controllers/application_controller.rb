@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
 
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::Cookies
   include CanCan::ControllerAdditions
 
