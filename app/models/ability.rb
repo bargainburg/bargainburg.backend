@@ -5,6 +5,8 @@ class Ability
     user ||= User.new
 
     can :read, Coupon, :hidden => false
+    cannot :read, Coupon, :end_date.lt => Time.now
+    cannot :read, Coupon, :begin_date.gt => Time.now
 
     can :read, Category
 
