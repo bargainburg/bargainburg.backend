@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     if params[:expand_merchants] == "1"
-      @categories = @categories.includes(:merchants).to_json(:include => { merchants: {only: [:name, :id]}})
+      @categories = @categories.includes(:merchants).where("merchants.approved" => true).to_json(:include => { merchants: {only: [:name, :id]}})
     end
 
     render json: @categories, callback: params[:callback]
