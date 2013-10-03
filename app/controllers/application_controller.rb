@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include CanCan::ControllerAdditions
 
-  before_action :add_allow_acces_control_headers
+  before_action :add_access_control_allow_origin_headers
 
   check_authorization
 
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::API
     render json: exception.message.to_json, status: :unauthorized, callback: params[:callback]
   end
 
-  def add_allow_acces_control_headers
+  def add_access_control_allow_origin_headers
     headers['Access-Control-Allow-Origin'] = 'http://admin.bargainburg.co'
   end
 

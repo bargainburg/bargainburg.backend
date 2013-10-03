@@ -4,33 +4,24 @@ class CouponsController < ApplicationController
   # GET /coupons
   # GET /coupons.json
   def index
+    if params[:merchant_id].present?
+      @merchant = Merchant.find(params[:merchant_id])
+      authorize! :read, @merchant
+      @coupons = @merchant.coupons.accessible_by(current_ability)
+    end
 
-	if params[:merchant_id].present?
-		@coupons = @coupons.where(:merchant_id => params[:merchant_id])
-	end
-
-	if (params[:callback].present?)
-		render json: @coupons, callback: params[:callback]
-	else
-		render json: @coupons
-	end
+    render json: @coupons, callback: params[:callback]
   end
 
   # GET /coupons/1
   # GET /coupons/1.json
   def show
-
-	if (params[:callback].present?)
-		render json: @coupon, callback: params[:callback]
-	else
-		render json: @coupon
-	end
+    render json: @coupon, callback: params[:callback]
   end
 
   # POST /coupons
   # POST /coupons.json
   def create
-
     if @coupon.save
       render json: @coupon, status: :created, location: @coupon
     else
@@ -41,7 +32,6 @@ class CouponsController < ApplicationController
   # PATCH/PUT /coupons/1
   # PATCH/PUT /coupons/1.json
   def update
-
     if @coupon.update(params[:coupon])
       head :no_content
     else
@@ -52,9 +42,7 @@ class CouponsController < ApplicationController
   # DELETE /coupons/1
   # DELETE /coupons/1.json
   def destroy
-
     @coupon.destroy
-
     head :no_content
   end
 end
