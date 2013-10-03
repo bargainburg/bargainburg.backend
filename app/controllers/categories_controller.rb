@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 	if (params[:expand_merchants].present?) && (params[:expand_merchants] == "1")
 		# this line may need to be edited in the futute to remove the to_json
 		# so that changes can be made after this if statement but before the render
-		@categories = Category.includes(:merchants).order("name ASC").to_json(:include => { merchants: {only: [:name, :id]}})
+		@categories = Category.includes(:merchants).order("categories.name ASC, merchants.name ASC").to_json(:include => { merchants: {only: [:name, :id]}})
 	else
 		@categories = Category.order("name ASC") #order categories in alphabetical order
 	end
