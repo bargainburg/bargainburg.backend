@@ -1,13 +1,18 @@
 Api::Application.routes.draw do
  
   scope '/v1' do
-	resources :categories, except: [:new, :edit, :destroy]
+	resources :categories, except: [:new, :edit, :destroy] do
+		resources :merchants, only: [:index]
+	end
  	resources :point_of_contacts, except: [:new, :edit, :destroy]
 	resources :merchants, only: [:index, :show, :create, :update] do
 		resources :coupons, only: [:index]
 		resources :point_of_contacts, only: [:index]
 	end
 	resources :coupons, only: [:index, :show, :create, :update]
+  get 'search', to: 'search#index'
+  post 'login', to: 'user_sessions#create'
+  post 'logout', to: 'user_sessions#destroy'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
