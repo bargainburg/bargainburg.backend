@@ -12,8 +12,6 @@ class Ability
 
     can :read, Merchant, :approved => true
 
-	can :index, :search
-
     if user.persisted?
       can :manage, Merchant, :user_id => user.id
       can :manage, Coupon, :merchant => {:user_id => user.id}

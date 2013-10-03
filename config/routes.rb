@@ -10,7 +10,7 @@ Api::Application.routes.draw do
 		resources :point_of_contacts, only: [:index]
 	end
 	resources :coupons, only: [:index, :show, :create, :update]
-	resources :search, only: [:index]
+  get 'search', to: 'search#index'
   post 'login', to: 'user_sessions#create'
   post 'logout', to: 'user_sessions#destroy'
   end
