@@ -9,10 +9,10 @@ Backend services and REST API
 * /v1/categories(.:format)
     * GET - return all of the categories
 
-    Parameters
-        **Optional**
-        expand_merchants=1
-            returns a nested set of the merchant id's and name within each category
+Parameters
+**Optional**
+expand\_merchants=1
+    returns a nested set of the merchant id's and name within each category
 
     * POST - To be removed
 * /v1/categories/:id(.:format)
@@ -43,17 +43,19 @@ Backend services and REST API
 * /v1/search(.:format)
     * GET - return results of search in query parameter
 
-    Parameters
-        **Required**
-        query=SEARCH_STRING
+Parameters
+**Required**
+query=SEARCHSTRING
 
 * /v1/login(.:format)
     * POST - login as given user
 
-    Parameters
-        email
-        password
-        remember_me {true,false}
+Parameters
+**Required**
+    email
+    password
+    remember_me {true,false}
+
 * /v1/logout(.:format)
     * POST - logout as current user
 
