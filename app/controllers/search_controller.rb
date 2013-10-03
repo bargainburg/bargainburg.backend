@@ -8,8 +8,8 @@ class SearchController < ApplicationController
       query = "%#{params[:query]}%"
       @coupons = Coupon.accessible_by(current_ability).where("description like ? or name like ?", query, query).order('name ASC')
       @merchants = Merchant.accessible_by(current_ability).where("description like ? or name like ?" , query, query).order('name ASC')
-      @vals = @coupons.concat(@merchants).concat(@categories)
-      @vals.sort! {|a,b| a.name <=> b.name }
+      @vals = @coupons.map {|c| c.as_json.merge(:type => "coupon") }.concat(@merchants.map {|m| m.as_json.merge(:type => "merchant")})
+      @vals.sort! {|a,b| a[:name] <=> b[:name] }
     end
 
     @vals ||= []
