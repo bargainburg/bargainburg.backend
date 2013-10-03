@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-
+	authorize_resource :class => false
 	def index 
 
 		if params[:query].present?
