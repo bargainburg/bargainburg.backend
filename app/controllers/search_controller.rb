@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 	def index 
 
 		if params[:query].present?
-			@vals = {"coupons" => Coupon.where("description like ? or name like ?", "%#{params[:query]}%", "%#{params[:query]}%"), "merchants" => Merchant.where("description like ? or name like ?" , "%#{params[:query]}%","%#{params[:query]}%")}
+			@vals = {"coupons" => Coupon.where("description like ? or name like ?", "%#{params[:query]}%", "%#{params[:query]}%"), "merchants" => Merchant.where("description like ? or name like ?" , "%#{params[:query]}%","%#{params[:query]}%"), "categories" => Category.where("name like ?", "%#{params[:query]}%")}
 		end
 		if (params[:callback].present?)
 			render json: @vals, callback: params[:callback]
