@@ -9,6 +9,7 @@ class Ability
     if user.persisted?
       can :manage, Merchant, :user_id => user.id
       can :manage, Coupon, :merchant => {:user_id => user.id}
+      can :manage, PointOfContact, :merchant => {:user_id => user.id}
     else
       can :read, PointOfContact
 
@@ -17,6 +18,7 @@ class Ability
       can :read, Coupon, :hidden => false
       can :read, Coupon, :end_date.gt => Time.now
       can :read, Coupon, :begin_date.lt => Time.now
+      can :manage, PointOfContact, :merchant => {:user_id => user.id}
     end
   end
 end
