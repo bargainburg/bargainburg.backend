@@ -6,18 +6,12 @@ Backend services and REST API
 ##Routes
 * /v1/categories/:category\_id/merchants(.:format)
     * GET - return all of the merchants within the given category
-* /v1/categories(.:format)
-    * GET - return all of the categories
-
-Parameters  
-**Optional**  
-expand\_merchants=1  
-    returns a nested set of the merchant id's and name within each category  
-
-    * POST - To be removed
+* /v1/categories(.:format)(?expand\_merchants=1)
+    * GET - return all of the categories. If expand\_merchants is set then a set of the merchant ids and names will be nested inside each category
+    * POST - create a category
 * /v1/categories/:id(.:format)
     * GET - return a single category
-    * PUT - To be removed
+    * PUT - update a single category
 * /v1/point\_of\_contacts(.:format)
     * GET - return all of the points of contact
     * POST - create a point of contact
@@ -28,8 +22,8 @@ expand\_merchants=1
     * GET - returns all of the coupons for a merchant
 * /v1/merchants/:merchant\_id/point\_of\_contacts(.:format)
     * GET - return all of the points of contact for a merchant
-* /v1/merchants(.:format)
-    * GET - return all fo the merchants
+* /v1/merchants(.:format)(?expand_coupons=1)
+    * GET - return all fo the merchants, if expand_coupons is set then an array of the coupon ids and names will be returned within reach merchant
     * POST - create a merchant
 * /v1/merchants/:id(.:format)
     * GET - return a single merchant
@@ -40,22 +34,10 @@ expand\_merchants=1
 * /v1/coupons/:id(.:format)
     * GET - return a single coupon
     * PUT - update a coupon's fields
-* /v1/search(.:format)
+* /v1/search(.:format)?query=StringToSearchFor
     * GET - return results of search in query parameter
-
-Parameters   
-**Required**  
-query=SEARCHSTRING  
-
 * /v1/login(.:format)
-    * POST - login as given user
-
-Parameters  
-**Required**  
-    email  
-    password  
-    remember_me {true,false}  
-
+    * POST - login as given user 
 * /v1/logout(.:format)
     * POST - logout as current user
 
