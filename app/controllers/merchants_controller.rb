@@ -1,37 +1,31 @@
 class MerchantsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /merchants
   # GET /merchants.json
   def index
-    @merchants = Merchant.all
+    if params[:category_id].present?
+      @merchants = @merchants.where(:category_id => params[:category_id]).order("name ASC")
+    else
+      @merchants = @merchants.order("name ASC")
+    end
 
-	if (params[:callback].present?)
-		render json: @merchants, callback: params[:callback]
-	else
-		render json: @merchants
-	end
+    render json: @merchants, callback: params[:callback]
   end
 
   # GET /merchants/1
   # GET /merchants/1.json
   def show
-    @merchant = Merchant.find(params[:id])
-
     if params[:expand_coupons] == '1'
-      @merchant = @merchant.as_json(:include => :coupons)
+      @coupons = @merchant.coupons.accessible_by(current_ability)
+      @merchant = @merchant.as_json.merge(:coupons => @coupons.as_json)
     end
-
-	if (params[:callback].present?)
-		render json: @merchant, callback: params[:callback]
-	else
-		render json: @merchant
-	end
+    render json: @merchant, callback: params[:callback]
   end
 
   # POST /merchants
   # POST /merchants.json
   def create
-    @merchant = Merchant.new(params[:merchant])
-
     if @merchant.save
       render json: @merchant, status: :created, location: @merchant
     else
@@ -42,8 +36,6 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
-    @merchant = Merchant.find(params[:id])
-
     if @merchant.update(params[:merchant])
       head :no_content
     else
@@ -54,9 +46,7 @@ class MerchantsController < ApplicationController
   # DELETE /merchants/1
   # DELETE /merchants/1.json
   def destroy
-    @merchant = Merchant.find(params[:id])
     @merchant.destroy
-
     head :no_content
   end
 end
