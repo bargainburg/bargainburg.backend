@@ -25,8 +25,10 @@ Backend services and REST API
 * /v1/merchants(.:format)(?expand_coupons=1)
     * GET - return all fo the merchants, if expand_coupons is set then an array of the coupon ids and names will be returned within reach merchant
     * POST - create a merchant
-* /v1/merchants/:id(.:format)
-    * GET - return a single merchant
+* /v1/merchants/:id(.:format)(?(only\_names=1|category\_id=cat\_id))
+    * GET - return a single merchant. If only\_names is set then only the
+      name and id of each merchant is returned. If category_id is set, then
+      the results will be restricted to those belonging to that category.
     * PUT - update a merchant's fields
 * /v1/coupons(.:format)
     * GET - return all of the coupons
