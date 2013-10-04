@@ -18,7 +18,6 @@ class Ability
       can :read, Coupon, :hidden => false
       can :read, Coupon, :end_date.gt => Time.now
       can :read, Coupon, :begin_date.lt => Time.now
-      can :manage, PointOfContact, :merchant => {:user_id => user.id}
     end
   end
 end
