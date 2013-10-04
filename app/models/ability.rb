@@ -17,6 +17,7 @@ class Ability
     if user.persisted?
       can :manage, Merchant, :user_id => user.id
       can :manage, Coupon, :merchant => {:user_id => user.id}
+      can :manage, PointOfContact, :merchant => {:user_id => user.id}
     end
 
   end
