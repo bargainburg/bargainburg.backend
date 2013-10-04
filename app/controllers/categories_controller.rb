@@ -7,8 +7,8 @@ class CategoriesController < ApplicationController
     if params[:expand_merchants] == "1"
       merchant_conditions = current_ability.model_adapter(Merchant, :index).conditions
       @categories = @categories.includes(:merchants).where(:merchants => merchant_conditions).order("categories.name ASC, merchants.name ASC").to_json(:include => { merchants: {only: [:name, :id]}})
-	else
-	  @categories = @categories.order("name ASC")
+    else
+      @categories = @categories.order("name ASC")
     end
 
     render json: @categories, callback: params[:callback]
