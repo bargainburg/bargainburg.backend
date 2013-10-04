@@ -5,10 +5,15 @@ class MerchantsController < ApplicationController
   # GET /merchants.json
   def index
     if params[:category_id].present?
-      @merchants = @merchants.where(:category_id => params[:category_id]).order("name ASC")
-    else
-      @merchants = @merchants.order("name ASC")
+      @merchants = @merchants.where(:category_id => params[:category_id])
     end
+
+    @merchants = @merchants.order("name ASC")
+
+    if params[:only_names] == '1'
+      @merchants = @merchants.as_json(only: [:name, :id])
+    end
+
 
     render json: @merchants, callback: params[:callback]
   end
