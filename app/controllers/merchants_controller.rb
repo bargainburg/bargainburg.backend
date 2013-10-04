@@ -16,6 +16,10 @@ class MerchantsController < ApplicationController
   # GET /merchants/1
   # GET /merchants/1.json
   def show
+    if params[:expand_coupons] == '1'
+      @coupons = @merchant.coupons.accessible_by(current_ability)
+      @merchant = @merchant.as_json.merge(:coupons => @coupons.as_json)
+    end
     render json: @merchant, callback: params[:callback]
   end
 
