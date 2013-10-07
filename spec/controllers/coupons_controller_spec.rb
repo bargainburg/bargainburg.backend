@@ -36,6 +36,13 @@ describe CouponsController do
         get :show, :id => FactoryGirl.create(:future_coupon)
         expect(response.status).to eq(401)
       end
+
+      it "shouldn't render a coupon from an unapproved merchant" do
+        m = FactoryGirl.create(:unpproved_merchant)
+        c = FactoryGirl.create(:valid_visible_coupon, :merchant => m)
+        get :show, :id => c
+        expect(response.status).to eq(401)
+      end
     end
 
     describe "#index" do
@@ -103,5 +110,53 @@ describe CouponsController do
     end
 
     it_behaves_like "a working controller"
+
+    describe "#show" do
+
+      context "another merchant's coupon" do
+        it "renders a valid, visible coupon" do
+          get :show, :id => FactoryGirl.create(:valid_visible_coupon)
+          expect(response.status).to eq(200)
+        end
+
+        it "shouldn't render an expired coupon" do
+          get :show, :id => FactoryGirl.create(:expired_coupon)
+          expect(response.status).to eq(401)
+        end
+
+        it "shouldn't render a future coupon" do
+          get :show, :id => FactoryGirl.create(:future_coupon)
+          expect(response.status).to eq(401)
+        end
+
+        it "shouldn't render a hidden coupon" do
+          get :show, :id => FactoryGirl.create(:hidden_coupon)
+          expect(response.status).to eq(401)
+        end
+      end
+
+      context "this merchant's coupon" do
+        it "renders a valid, visible coupon" do
+          get :show, :id => FactoryGirl.create(:valid_visible_coupon, :merchant => merchant)
+          expect(response.status).to eq(200)
+        end
+
+        it "renders an expired coupon" do
+          get :show, :id => FactoryGirl.create(:expired_coupon, :merchant => merchant)
+          expect(response.status).to eq(200)
+        end
+
+        it "renders a future coupon" do
+          get :show, :id => FactoryGirl.create(:future_coupon, :merchant => merchant)
+          expect(response.status).to eq(200)
+        end
+
+        it "renders a hidden coupon" do
+          get :show, :id => FactoryGirl.create(:hidden_coupon, :merchant => merchant)
+          expect(response.status).to eq(200)
+        end
+      end
+
+    end
   end
 end
