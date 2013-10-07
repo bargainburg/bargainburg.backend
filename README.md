@@ -48,7 +48,7 @@ Backend services and REST API
 
 Run test suite:
 
-    bundle exec rake rspec
+    bundle exec rspec --color --format Fuubar
 
 Run test suite whenever a file changes:
 
