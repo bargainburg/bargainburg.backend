@@ -54,6 +54,9 @@ Run test suite whenever a file changes:
 
     bundle exec guard --force-polling
 
+A test coverage report will be generated with each test run under
+`coverage/`. Open `coverage/index.html` to see the test coverage.
+
 
 If you want some pretty notification stuff for the tests, [look at adding
 notifiers to your Guardfile](https://github.com/guard/guard).
