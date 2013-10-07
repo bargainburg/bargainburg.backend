@@ -52,7 +52,8 @@ Run test suite:
 
 Run test suite whenever a file changes:
 
-    bundle exec guard --force-polling
+  1. `cp Guardfile.example Guardfile`
+  2. `bundle exec guard --force-polling`
 
 A test coverage report will be generated with each test run under
 `coverage/`. Open `coverage/index.html` to see the test coverage.
