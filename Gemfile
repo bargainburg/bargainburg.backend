@@ -18,14 +18,24 @@ gem 'authlogic', :github => 'tylerkahn/authlogic'
 
 # Use sqlite3 as the database for Active Record
 if RUBY_PLATFORM =~ /win32/
-	gem 'sqlite3', :platform => [:mswin, :mingw]
+  gem 'sqlite3', :platform => [:mswin, :mingw]
 else
-	gem 'sqlite3'
+  gem 'sqlite3'
 end
 
 group :development do
-	gem 'populator'
-	gem 'faker'
+  gem 'populator'
+  gem 'faker'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'fuubar', "~> 1.2.1"
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'ruby_gntp'
+  gem 'simplecov', :require => false
 end
 
 # To use ActiveModel has_secure_password

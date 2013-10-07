@@ -3,6 +3,7 @@
 .sass-cache
 capybara-*.html
 .rspec
+Guardfile
 .rvmrc
 /.bundle
 /vendor/bundle
