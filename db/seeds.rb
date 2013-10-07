@@ -6,7 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
-m = Merchant.find(1)
-m.user = u
-m.save
