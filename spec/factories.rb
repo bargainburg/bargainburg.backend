@@ -27,16 +27,13 @@ FactoryGirl.define do
     category
     user
 
-    factory :merchant_with_coupons do
-      ignore do
-        coupon_count 5
-      end
-
-      after(:create) do |merchant, evaluator|
-        FactoryGirl.create_list(:coupon, evaluator.coupon_count, merchant: merchant)
-      end
+    factory :unpproved_merchant do
+      approved false
     end
 
+    factory :approved_merchant do
+      approved true
+    end
   end
 
   factory :coupon do
