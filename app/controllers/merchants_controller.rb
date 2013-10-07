@@ -32,7 +32,12 @@ class MerchantsController < ApplicationController
   # POST /merchants.json
   def create
     if @merchant.save
-      render json: @merchant, status: :created, location: @merchant
+		#check for valid phone number
+		if (@merchant.phone =~ (1)?(?:-)?(?:\(|-)?([\d]{3})(?:\.|\-|\))([\d]{3})(?:\.|\-)([\d]{4})(?: ?x([\d]{3,5}))?)
+			render json: @merchant, status: :created, location: @merchant
+		 else
+			render json: @merchant.errors, status: :unprocessable_entity
+		end
     else
       render json: @merchant.errors, status: :unprocessable_entity
     end
@@ -42,7 +47,12 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1.json
   def update
     if @merchant.update(params[:merchant])
-      head :no_content
+		#check for valid phone number
+		if (@merchant.phone =~ (1)?(?:-)?(?:\(|-)?([\d]{3})(?:\.|\-|\))([\d]{3})(?:\.|\-)([\d]{4})(?: ?x([\d]{3,5}))?)
+			head :no_content
+		 else
+			render json: @merchant.errors, status: :unprocessable_entity
+		end
     else
       render json: @merchant.errors, status: :unprocessable_entity
     end
