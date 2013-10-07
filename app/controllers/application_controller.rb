@@ -3,10 +3,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include CanCan::ControllerAdditions
 
-  before_action :add_access_control_allow_origin_headers
-
   check_authorization
-
 
   helper_method :current_user_session, :current_user
 
@@ -24,10 +21,6 @@ class ApplicationController < ActionController::API
 
   rescue_from CanCan::AccessDenied do |exception|
     render json: exception.message.to_json, status: :unauthorized, callback: params[:callback]
-  end
-
-  def add_access_control_allow_origin_headers
-    headers['Access-Control-Allow-Origin'] = 'http://admin.bargainburg.co'
   end
 
 end
