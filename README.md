@@ -44,6 +44,28 @@ Backend services and REST API
     * POST - logout as current user
 
 
+##Testing
+
+Run test suite:
+
+    bundle exec rake rspec
+
+Run test suite whenever a file changes:
+
+    bundle exec guard --force-polling
+
+
+If you want some pretty notification stuff for the tests, [look at adding
+notifiers to your Guardfile](https://github.com/guard/guard).
+
+I'm using the `gntp` (with [Growl](http://growl.info/)) and `tmux` notifiers.
+
+    notification :tmux
+    notification :gntp
+
+The GNTP one looks like this:
+
+![GNTP Notifier](http://i.imgur.com/PHrEtwv.png)
 
 
 ##Installation Specifics
