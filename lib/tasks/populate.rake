@@ -28,7 +28,6 @@ namespace :db do
           coupon.hidden = [true,false]
           coupon.category_id = category.id
           coupon.merchant_id = merchant.id
-          coupon.save
         end
 
         PointOfContact.populate 2 do |poc|
@@ -36,12 +35,9 @@ namespace :db do
           poc.phone	= Faker::PhoneNumber.phone_number
           poc.email	= Faker::Internet.email
           poc.merchant_id = merchant.id
-          poc.save
         end
 
-        merchant.save
       end
-      category.save
     end
     u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
     m = Merchant.find(1)
