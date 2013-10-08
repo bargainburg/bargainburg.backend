@@ -13,7 +13,7 @@ namespace :db do
         merchant.name = Populator.words(1..5).titleize
         merchant.email = Faker::Internet.email
         merchant.description = Populator.sentences(2..10)
-        merchant.price_range = [1,2,3,4,5]
+        merchant.price_range = [1,2,3,4]
         merchant.created_at = 2.years.ago..Time.now
         merchant.approved = [true, false]
         merchant.phone   = Faker::PhoneNumber.phone_number
