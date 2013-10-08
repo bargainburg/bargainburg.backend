@@ -10,7 +10,7 @@ namespace :db do
       category.name = Populator.words(1..3).titleize
       Merchant.populate 1..10 do |merchant|
         merchant.category_id = category.id
-        merchant.name = Populator.words(1..5).titleize
+        merchant.name = Faker::Company.name
         merchant.email = Faker::Internet.email
         merchant.description = Populator.sentences(2..10)
         merchant.price_range = [1,2,3,4]
@@ -18,7 +18,7 @@ namespace :db do
         merchant.approved = [true, false]
         merchant.phone   = Faker::PhoneNumber.phone_number
         merchant.hours = "M-F 9-5"
-        merchant.link = "www.web.com"
+        merchant.link = Faker::Internet.url
 
         Coupon.populate 5 do |coupon|
           coupon.name    = Faker::Name.name
@@ -28,6 +28,7 @@ namespace :db do
           coupon.hidden = [true,false]
           coupon.category_id = category.id
           coupon.merchant_id = merchant.id
+          coupon.save
         end
 
         PointOfContact.populate 2 do |poc|
@@ -35,8 +36,12 @@ namespace :db do
           poc.phone	= Faker::PhoneNumber.phone_number
           poc.email	= Faker::Internet.email
           poc.merchant_id = merchant.id
+          poc.save
         end
+
+        merchant.save
       end
+      category.save
     end
     u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
     m = Merchant.find(1)
