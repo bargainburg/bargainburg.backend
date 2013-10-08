@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002000330) do
+ActiveRecord::Schema.define(version: 20131008181158) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20131002000330) do
   create_table "coupons", force: true do |t|
     t.datetime "begin_date"
     t.datetime "end_date"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "hidden"
     t.string   "name"
     t.datetime "created_at"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131002000330) do
     t.string   "phone"
     t.string   "hours"
     t.string   "link"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "approved"
     t.integer  "price_range"
     t.datetime "created_at"
