@@ -40,7 +40,7 @@ namespace :db do
       end
     end
     u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
-    m = Merchant.find(1)
+    m = Merchant.take
     m.approved = true
     m.user = u
     m.save
