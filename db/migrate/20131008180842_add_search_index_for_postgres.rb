@@ -1,6 +1,6 @@
 class AddSearchIndexForPostgres < ActiveRecord::Migration
   def change
-    if Rails.env == "production"
+    if ActiveRecord::Base.connection.adapter_name == "PostgreSQL"
       execute "CREATE INDEX coupons_name_gist_trgm_idx ON coupons USING gist (name gist_trgm_ops);"
       execute "CREATE INDEX coupons_description_gist_trgm_idx ON coupons USING gist (description gist_trgm_ops);"
 
