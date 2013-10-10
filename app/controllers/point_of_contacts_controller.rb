@@ -1,5 +1,5 @@
 class PointOfContactsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create, :update]
 
   # GET /point_of_contacts
   # GET /point_of_contacts.json
@@ -20,6 +20,10 @@ class PointOfContactsController < ApplicationController
   # POST /point_of_contacts
   # POST /point_of_contacts.json
   def create
+	@point_of_contact = PointOfContact.new(params[:point_of_contact])
+	@point_of_contact.merchant = current_user.merchant
+	authorize! :create, @point_of_contact
+	
     if @point_of_contact.save
       render json: @point_of_contact, status: :created, location: @point_of_contact
     else
