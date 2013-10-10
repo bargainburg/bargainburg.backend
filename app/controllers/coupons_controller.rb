@@ -1,5 +1,5 @@
 class CouponsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create, :update]
 
   # GET /coupons
   # GET /coupons.json
@@ -23,6 +23,11 @@ class CouponsController < ApplicationController
   # POST /coupons
   # POST /coupons.json
   def create
+	@coupon = Coupon.new(params[:coupon])
+    @coupon.merchant = current_user.merchant
+    @coupon.category = current_user.merchant.category
+    authorize! :create, @coupon
+	
     if @coupon.save
       render json: @coupon, status: :created, location: @coupon
     else
