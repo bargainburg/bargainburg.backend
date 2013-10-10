@@ -44,5 +44,8 @@ namespace :db do
     m.approved = true
     m.user = u
     m.save
+
+    u.merchant = m
+    u.save
   end
 end
