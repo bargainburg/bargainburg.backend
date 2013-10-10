@@ -158,5 +158,53 @@ describe CouponsController do
       end
 
     end
+
+    describe "#index" do
+      it "renders only valid, visible coupons from other merchants" do
+        m = FactoryGirl.create(:approved_merchant)
+        FactoryGirl.create_list(:hidden_coupon, 2, :merchant => m)
+        FactoryGirl.create_list(:expired_coupon, 2, :merchant => m)
+        FactoryGirl.create_list(:future_coupon, 2, :merchant => m)
+        FactoryGirl.create_list(:valid_visible_coupon, 3, :merchant => m)
+
+        get :index
+        expect(JSON.parse(response.body).size).to eq(3)
+      end
+
+      it "renders all coupons for this merchant" do
+        FactoryGirl.create_list(:hidden_coupon, 2, :merchant => merchant)
+        FactoryGirl.create_list(:expired_coupon, 2, :merchant => merchant)
+        FactoryGirl.create_list(:future_coupon, 2, :merchant => merchant)
+        FactoryGirl.create_list(:valid_visible_coupon, 3, :merchant => merchant)
+
+        get :index
+        expect(JSON.parse(response.body).size).to eq(9)
+      end
+
+      context "?merchant_id=" do
+        it "renders all coupons for this merchant" do
+          FactoryGirl.create_list(:hidden_coupon, 2, :merchant => merchant)
+          FactoryGirl.create_list(:expired_coupon, 2, :merchant => merchant)
+          FactoryGirl.create_list(:future_coupon, 2, :merchant => merchant)
+          FactoryGirl.create_list(:valid_visible_coupon, 3, :merchant => merchant)
+
+          get :index, :merchant_id => merchant
+          expect(JSON.parse(response.body).size).to eq(9)
+        end
+
+        it "renders only valid, visible coupons for other merchants" do
+          m = FactoryGirl.create(:approved_merchant)
+
+          FactoryGirl.create_list(:hidden_coupon, 2, :merchant => m)
+          FactoryGirl.create_list(:expired_coupon, 2, :merchant => m)
+          FactoryGirl.create_list(:future_coupon, 2, :merchant => m)
+          FactoryGirl.create_list(:valid_visible_coupon, 3, :merchant => m)
+
+          get :index, :merchant_id => m
+          expect(JSON.parse(response.body).size).to eq(3)
+        end
+      end
+
+    end
   end
 end
