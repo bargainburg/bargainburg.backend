@@ -11,11 +11,13 @@ class Ability
 
     can :read, PointOfContact
     can :read, Merchant, :approved => true
+    can :create, User
 
     if user.persisted?
       can :manage, Merchant, :user_id => user.id
       can :manage, Coupon, :merchant => {:user_id => user.id}
       can :manage, PointOfContact, :merchant => {:user_id => user.id}
+      can :manage, User, :id => user.id
     end
 
   end
