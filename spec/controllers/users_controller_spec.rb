@@ -17,7 +17,7 @@ describe UsersController do
                               :password => "test123",
                               :password_confirmation => "test123"}
       u = User.find(JSON.parse(response.body)["id"])
-      puts controller.session["user_credentials"], u.persistence_token
+      expect(controller.session["user_credentials"]).to eq(u.persistence_token)
     end
 
   end
