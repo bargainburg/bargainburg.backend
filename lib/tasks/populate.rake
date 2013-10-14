@@ -4,7 +4,7 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [Category, Merchant, Coupon, PointOfContact].each(&:delete_all)
+    [Category, Merchant, Coupon, PointOfContact, User].each(&:delete_all)
     
     Category.populate 4 do |category|
       category.name = Populator.words(1..3).titleize
