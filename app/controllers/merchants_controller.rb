@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create, :update]
 
   # GET /merchants
   # GET /merchants.json
@@ -31,32 +31,33 @@ class MerchantsController < ApplicationController
   # POST /merchants
   # POST /merchants.json
   def create
-    if @merchant.save
-		#check for valid phone number
-		if (@merchant.phone =~ (1)?(?:-)?(?:\(|-)?([\d]{3})(?:\.|\-|\))([\d]{3})(?:\.|\-)([\d]{4})(?: ?x([\d]{3,5}))?)
+    #check for valid phone number
+	if ((@merchant.phone) =~ /(\(\d{3}\) ?)(\d{3}(-|.))?\d{3}(-|.)\d{4}/)
+		if @merchant.save
 			render json: @merchant, status: :created, location: @merchant
-		 else
+		else
 			render json: @merchant.errors, status: :unprocessable_entity
 		end
     else
-      render json: @merchant.errors, status: :unprocessable_entity
+		render json: @merchant.errors, status: :unprocessable_entity
     end
-  end
+   end
+	
 
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
-    if @merchant.update(params[:merchant])
-		#check for valid phone number
-		if (@merchant.phone =~ (1)?(?:-)?(?:\(|-)?([\d]{3})(?:\.|\-|\))([\d]{3})(?:\.|\-)([\d]{4})(?: ?x([\d]{3,5}))?)
+	#check for valid phone number
+	if ((@merchant.phone) =~ /(\(\d{3}\) ?)(\d{3}(-|.))?\d{3}(-|.)\d{4}/)
+		if @merchant.update(params[:merchant])
 			head :no_content
 		 else
 			render json: @merchant.errors, status: :unprocessable_entity
 		end
     else
-      render json: @merchant.errors, status: :unprocessable_entity
+		render json: @merchant.errors, status: :unprocessable_entity
     end
-  end
+   end
 
   # DELETE /merchants/1
   # DELETE /merchants/1.json
