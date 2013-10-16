@@ -40,6 +40,7 @@ end
 
 group :production do
     gem 'pg', "~> 0.17.0"
+    gem 'passenger', "~> 4.0.20"
 end
 
 # To use ActiveModel has_secure_password
