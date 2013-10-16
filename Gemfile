@@ -30,6 +30,8 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'fuubar', "~> 1.2.1"
+  # Deploy with Capistrano
+  gem 'capistrano'
 end
 
 group :test do
@@ -52,8 +54,6 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
