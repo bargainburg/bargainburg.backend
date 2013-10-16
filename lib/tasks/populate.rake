@@ -19,6 +19,7 @@ namespace :db do
         merchant.phone   = Faker::PhoneNumber.phone_number
         merchant.hours = "M-F 9-5"
         merchant.link = Faker::Internet.url
+        merchant.address = Faker::Address.street_address
 
         Coupon.populate 5 do |coupon|
           coupon.name    = Faker::Name.name
