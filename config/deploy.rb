@@ -1,10 +1,12 @@
-set :application, 'my app name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'bargainburg.backend'
+set :repo_url, 'git@github.com:startuphokie/bargainburg.backend.git'
+set :branch, 'master'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :rails_env, "production"
 
-# set :deploy_to, '/var/www/my_app'
-# set :scm, :git
+set :deploy_to, '/home/api/bargainburg'
+set :scm, :git
 
 # set :format, :pretty
 # set :log_level, :debug
@@ -22,19 +24,36 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
+  #after :restart, :clear_cache do
+    #on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+    #end
+  #end
+
+  # copy database.yml into project
+  task :copy_database_config do
+    on roles(:app) do
+      production_db_config = "/home/api/database.yml"
+      execute "cp #{production_db_config} #{current_path}/config/database.yml"
+      `puts "replaced database.yml with live copy"` 
     end
   end
 
+  task :create_tmp do 
+    on roles(:app) do
+      execute "mkdir #{current_path}/tmp"
+    end
+  end
+
+  before "deploy:restart", "deploy:copy_database_config"
+  before "deploy:restart", "deploy:create_tmp"
   after :finishing, 'deploy:cleanup'
 
 end
