@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  load_and_authorize_resource :except => [:create, :update]
+  load_and_authorize_resource 
 
   # GET /merchants
   # GET /merchants.json
