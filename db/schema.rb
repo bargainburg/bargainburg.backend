@@ -61,6 +61,11 @@ ActiveRecord::Schema.define(version: 20131002000330) do
     t.integer  "merchant_id"
   end
 
+  create_table "searches", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                          null: false
     t.string   "password_digest",                null: false
