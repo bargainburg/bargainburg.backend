@@ -30,12 +30,19 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'fuubar', "~> 1.2.1"
+  # Deploy with Capistrano
+  gem 'capistrano'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'ruby_gntp'
   gem 'simplecov', :require => false
+end
+
+group :production do
+    gem 'pg', "~> 0.17.0"
+    gem 'passenger', "~> 4.0.20"
 end
 
 # To use ActiveModel has_secure_password
@@ -47,8 +54,6 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
