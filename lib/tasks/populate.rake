@@ -4,7 +4,7 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [Category, Merchant, Coupon, PointOfContact].each(&:delete_all)
+    [Category, Merchant, Coupon, PointOfContact, User].each(&:delete_all)
     
     Category.populate 4 do |category|
       category.name = Populator.words(1..3).titleize
@@ -19,6 +19,7 @@ namespace :db do
         merchant.phone   = Faker::PhoneNumber.phone_number
         merchant.hours = "M-F 9-5"
         merchant.link = Faker::Internet.url
+        merchant.address = Faker::Address.street_address
 
         Coupon.populate 5 do |coupon|
           coupon.name    = Faker::Name.name
@@ -44,5 +45,8 @@ namespace :db do
     m.approved = true
     m.user = u
     m.save
+
+    u.merchant = m
+    u.save
   end
 end
