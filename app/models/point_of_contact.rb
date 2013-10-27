@@ -1,3 +1,3 @@
 class PointOfContact < ActiveRecord::Base
-	belongs_to :Merchant
+	belongs_to :merchant
 end
