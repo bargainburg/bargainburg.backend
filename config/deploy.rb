@@ -1,9 +1,7 @@
 set :application, 'bargainburg.backend'
 set :repo_url, 'git@github.com:startuphokie/bargainburg.backend.git'
-set :branch, 'master'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-set :rails_env, "production"
 
 set :deploy_to, '/home/api/bargainburg'
 set :scm, :git
