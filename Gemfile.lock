@@ -63,6 +63,8 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
+    capistrano-bundler (1.0.0)
+      capistrano (>= 3.0.0.pre)
     celluloid (0.15.1)
       timers (~> 1.1.0)
     climate_control (0.0.3)
@@ -122,6 +124,7 @@ GEM
       rack
       rake (>= 0.8.1)
     pg (0.17.0)
+    pg (0.17.0-x86-mingw32)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
@@ -212,6 +215,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   cancan
   capistrano
+  capistrano-bundler
   factory_girl_rails
   faker
   fuubar (~> 1.2.1)
