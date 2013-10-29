@@ -6,8 +6,8 @@ class SearchController < ApplicationController
 
     if params[:query].present?
       query = "%#{params[:query]}%"
-      @coupons = Coupon.accessible_by(current_ability).where("description like ? or name like ?", query, query).order('name ASC')
-      @merchants = Merchant.accessible_by(current_ability).where("description like ? or name like ?" , query, query).order('name ASC')
+      @coupons = Coupon.where("(description like ? or name like ?) and hidden = 'f'", query, query).order('name ASC')
+      @merchants = Merchant.where("(description like ? or name like ?) and approved = 't'" , query, query).order('name ASC')
       @vals = @coupons.map {|c| c.as_json.merge(:type => "coupon") }.concat(@merchants.map {|m| m.as_json.merge(:type => "merchant")})
       @vals.sort! {|a,b| a[:name] <=> b[:name] }
     end
