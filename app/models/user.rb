@@ -13,5 +13,5 @@ class User < ActiveRecord::Base
   validates_presence_of [:password_confirmation, :password, :email], :on => :create
 
   # change this to a db validation if using sharding
-  validates :email, uniqeness: true
+  validates :email, uniqueness: true
 end
