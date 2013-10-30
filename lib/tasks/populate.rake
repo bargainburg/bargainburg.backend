@@ -3,11 +3,10 @@ namespace :db do
   task :populate => :environment do
     require 'populator'
     require 'faker'
-    
-    [Category, Merchant, Coupon, PointOfContact, User].each(&:delete_all)
-    
-    Category.populate 4 do |category|
-      category.name = Populator.words(1..3).titleize
+
+    [Merchant, Coupon, PointOfContact, User].each(&:delete_all)
+
+    Category.all.each do |category|
       Merchant.populate 1..10 do |merchant|
         merchant.category_id = category.id
         merchant.name = Faker::Company.name
@@ -37,7 +36,6 @@ namespace :db do
           poc.email	= Faker::Internet.email
           poc.merchant_id = merchant.id
         end
-
       end
     end
     u = User.create(:email => 'test', :password => 'test123', :password_confirmation => 'test123')
