@@ -9,7 +9,7 @@ describe UsersController do
       post :create, :user => {:email => FactoryGirl.generate(:email),
                               :password => "test123",
                               :password_confirmation => "test"}
-      expect(response.status).not_to eq(201)
+      expect(response.status).to eq(422)
     end
 
     it 'should allow the creation of a user' do

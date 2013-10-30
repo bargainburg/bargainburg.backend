@@ -206,5 +206,12 @@ describe CouponsController do
       end
 
     end
+	
+	describe "#create" do
+	  it "should allow the creation of a coupon" do
+        post :create, :coupon => FactoryGirl.build(:coupon, :merchant => merchant).as_json
+        expect(response.status).to eq(201)
+      end
+	end
   end
 end
