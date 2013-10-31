@@ -40,8 +40,8 @@ class PointOfContactsController < ApplicationController
   # DELETE /point_of_contacts/1
   # DELETE /point_of_contacts/1.json
   def destroy
-    @point_of_contact.destroy
-
+    @point_of_contact.isVisible = false
+    @point_of_contact.save
     head :no_content
   end
 end
