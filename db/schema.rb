@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20131014205503) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.boolean  "isVisible"
+    t.boolean  "visible"
   end
 
   create_table "merchants", force: true do |t|
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20131014205503) do
     t.integer  "category_id"
     t.integer  "user_id"
     t.string   "address"
-    t.boolean  "isVisible"
+    t.boolean  "visible"
   end
 
   add_index "merchants", ["user_id"], name: "index_merchants_on_user_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20131014205503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "merchant_id"
-    t.boolean  "isVisible"
+    t.boolean  "visible"
   end
 
   create_table "users", force: true do |t|
