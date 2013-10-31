@@ -44,7 +44,7 @@ class CouponsController < ApplicationController
   # DELETE /coupons/1.json
   def destroy
     @coupon.isVisible = false
-	  @coupon.save
+    @coupon.save
     head :no_content
   end
 end
