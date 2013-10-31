@@ -52,7 +52,7 @@ class MerchantsController < ApplicationController
   # DELETE /merchants/1.json
   def destroy
     @merchant.isVisible = false
-	  @merchant.save
+    @merchant.save
     head :no_content
   end
 end
