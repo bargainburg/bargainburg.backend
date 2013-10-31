@@ -51,7 +51,8 @@ class MerchantsController < ApplicationController
   # DELETE /merchants/1
   # DELETE /merchants/1.json
   def destroy
-    @merchant.destroy
+    @merchant.isVisible = false
+	  @merchant.save
     head :no_content
   end
 end
