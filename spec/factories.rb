@@ -58,6 +58,10 @@ FactoryGirl.define do
     factory :hidden_coupon do
       hidden true
     end
+	factory :invalid_coupon do
+	  begin_date 1.month.from_now
+	  end_date 1.month.ago
+	end
   end
 
   factory :point_of_contact do

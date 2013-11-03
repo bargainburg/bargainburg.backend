@@ -85,7 +85,7 @@ describe CouponsController do
 
     describe "#create, #update, #delete" do
       it "shouldn't authorize #create" do
-        post :create, FactoryGirl.build(:coupon)
+        post :create, :coupon => FactoryGirl.build(:coupon).as_json
         expect(response.status).to eq(401)
       end
 
@@ -208,9 +208,21 @@ describe CouponsController do
     end
 	
 	describe "#create" do
-	  it "should allow the creation of a coupon" do
+	  it "should not allow the creation of an invalid coupon" do
+		post :create, :coupon => {:image => Rails.root + 'spec/fixtures/files/Spongebob.gif', :merchant => merchant}
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should allow the creation of a valid coupon" do
         post :create, :coupon => FactoryGirl.build(:coupon, :merchant => merchant).as_json
         expect(response.status).to eq(201)
+      end
+	end
+	  
+	describe "#update" do
+	  it "should allow the update of a coupon" do
+        patch :update, :id => FactoryGirl.create(:coupon, :merchant => merchant)
+        expect(response.status).to eq(204)
       end
 	end
   end
