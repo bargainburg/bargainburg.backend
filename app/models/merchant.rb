@@ -6,4 +6,6 @@ class Merchant < ActiveRecord::Base
 
   validates_presence_of [:name, :approved, :phone, :price_range, :category_id]
   
+  validates_phone_number :merchant, :phone => /(\(\d{3}\) ?)(\d{3}(-|.))?\d{3}(-|.)\d{4}/
+  
 end
