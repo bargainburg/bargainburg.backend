@@ -208,8 +208,13 @@ describe CouponsController do
     end
 	
 	describe "#create" do
-	  it "should not allow the creation of an invalid coupon" do
-		post :create, :coupon => {:image => Rails.root + 'spec/fixtures/files/Spongebob.gif', :merchant => merchant}
+	  it "should not allow the creation of a coupon with invalid image" do
+		post :create, :coupon => FactoryGirl.build(:coupon_with_invalid_image, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow the creation of a coupon with image > 2MB" do
+		post :create, :coupon => FactoryGirl.build(:coupon_with_large_image, :merchant => merchant).as_json
 		expect(response.status).to eq(422)
 	  end
 	  
@@ -217,11 +222,33 @@ describe CouponsController do
         post :create, :coupon => FactoryGirl.build(:coupon, :merchant => merchant).as_json
         expect(response.status).to eq(201)
       end
+	  
+	  it "should allow the creation of a valid coupon with a valid image" do
+        post :create, :coupon => FactoryGirl.build(:coupon_with_valid_image, :merchant => merchant).as_json
+        expect(response.status).to eq(201)
+      end
 	end
 	  
 	describe "#update" do
+	  it "should not allow updating a coupon with invalid image" do
+		id = FactoryGirl.create(:coupon, :merchant => merchant)
+        patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_invalid_image, :merchant => merchant).as_json
+        expect(response.status).to eq(422)
+      end
+	  
+	  it "should not allow updating a coupon with image > 2MB" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+        patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_large_image, :merchant => merchant).as_json
+        expect(response.status).to eq(422)
+      end
+	
 	  it "should allow the update of a coupon" do
         patch :update, :id => FactoryGirl.create(:coupon, :merchant => merchant)
+        expect(response.status).to eq(204)
+      end
+	  
+	  it "should allow updating a coupon with valid image " do
+        patch :update, :id => FactoryGirl.create(:coupon_with_valid_image, :merchant => merchant)
         expect(response.status).to eq(204)
       end
 	end

@@ -9,6 +9,7 @@ require 'rspec/rails'
 require 'authlogic/test_case'
 
 include Authlogic::TestCase
+include ActionDispatch::TestProcess
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

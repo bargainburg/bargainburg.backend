@@ -58,9 +58,14 @@ FactoryGirl.define do
     factory :hidden_coupon do
       hidden true
     end
-	factory :invalid_coupon do
-	  begin_date 1.month.from_now
-	  end_date 1.month.ago
+	factory :coupon_with_valid_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/harry_potter.jpg', 'image/jpg')}
+	end
+	factory :coupon_with_invalid_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/Spongebob.gif', 'image/gif')}
+	end
+	factory :coupon_with_large_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/aerial.jpg', 'image/jpg')}
 	end
   end
 
