@@ -11,6 +11,11 @@ gem 'cancan'
 gem "rolify"
 gem "squeel", "~> 1.1.1"
 
+# Deploy with Capistrano
+gem 'capistrano'
+gem "capistrano-bundler"
+gem "capistrano-rails"
+
 gem 'authlogic', :github => 'tylerkahn/authlogic'
 # needed to work with rails-api
 # see: http://git.io/3h4-Jg
@@ -30,8 +35,6 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'fuubar', "~> 1.2.1"
-  # Deploy with Capistrano
-  gem 'capistrano'
 end
 
 group :test do
