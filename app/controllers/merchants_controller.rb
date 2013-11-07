@@ -31,6 +31,9 @@ class MerchantsController < ApplicationController
   # POST /merchants
   # POST /merchants.json
   def create
+    # TODO fix until strong params
+    @merchant.approved = false
+
     if @merchant.save
       render json: @merchant, status: :created, location: @merchant
     else
@@ -41,6 +44,9 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
+    # TODO fix until strong params
+    params[:merchant].delete :approved
+
     if @merchant.update(params[:merchant])
       head :no_content
     else
