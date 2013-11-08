@@ -218,6 +218,11 @@ describe CouponsController do
 		expect(response.status).to eq(422)
 	  end
 	  
+	  it "should not allow the creation of a coupon with end_date before start_date" do
+	    post :create, :coupon => FactoryGirl.build(:coupon_with_invalid_dates, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
 	  it "should allow the creation of a valid coupon" do
         post :create, :coupon => FactoryGirl.build(:coupon, :merchant => merchant).as_json
         expect(response.status).to eq(201)
@@ -241,6 +246,12 @@ describe CouponsController do
         patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_large_image, :merchant => merchant).as_json
         expect(response.status).to eq(422)
       end
+	  
+	  it "should not allow updating a coupon with end_date before start_date" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+		patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_invalid_dates, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
 	
 	  it "should allow the update of a coupon" do
         patch :update, :id => FactoryGirl.create(:coupon, :merchant => merchant)

@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :merchant do
     sequence (:name) {|n| "Merchant #{n}"}
+	phone "801-383-9781"
     description "Description of Merchant"
     price_range 3
     approved true
@@ -66,6 +67,10 @@ FactoryGirl.define do
 	end
 	factory :coupon_with_large_image do
 	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/aerial.jpg', 'image/jpg')}
+	end
+	factory :coupon_with_invalid_dates do
+	  end_date 2.weeks.ago
+	  begin_date 2.weeks.from_now
 	end
   end
 
