@@ -38,12 +38,12 @@ FactoryGirl.define do
     end
   end
 
-  factory :coupon do
+  factory :coupon do	
     sequence (:name) {|n| "Coupon #{n}"}
     description "Coupon Description"
     begin_date 1.month.ago
     end_date 1.month.from_now
-    hidden false
+	hidden false
     merchant
     category
 
@@ -57,7 +57,7 @@ FactoryGirl.define do
       begin_date 2.weeks.from_now
     end
     factory :hidden_coupon do
-      hidden true
+		hidden true
     end
 	factory :coupon_with_valid_image do
 	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/harry_potter.jpg', 'image/jpg')}
