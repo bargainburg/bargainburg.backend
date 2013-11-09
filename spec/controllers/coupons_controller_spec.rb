@@ -223,6 +223,26 @@ describe CouponsController do
 		expect(response.status).to eq(422)
 	  end
 	  
+	  it "should not allow the creation of a coupon with no start and end date" do
+	    post :create, :coupon => FactoryGirl.build(:coupon_with_no_dates, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow the creation of a coupon with no name" do
+	    post :create, :coupon => FactoryGirl.build(:coupon_with_no_name, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow the creation of a coupon with no category" do
+	    post :create, :coupon => FactoryGirl.build(:coupon_with_no_category, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow the creation of a coupon with hidden unset" do
+	    post :create, :coupon => FactoryGirl.build(:coupon_with_unset_hidden, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
 	  it "should allow the creation of a valid coupon" do
         post :create, :coupon => FactoryGirl.build(:coupon, :merchant => merchant).as_json
         expect(response.status).to eq(201)
@@ -250,6 +270,30 @@ describe CouponsController do
 	  it "should not allow updating a coupon with end_date before start_date" do
 	    id = FactoryGirl.create(:coupon, :merchant => merchant)
 		patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_invalid_dates, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow updating a coupon with no start and end date" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+	    patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_no_dates, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow updating a coupon with no name" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+	    patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_no_name, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow updating a coupon with no category" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+	    patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_no_category, :merchant => merchant).as_json
+		expect(response.status).to eq(422)
+	  end
+	  
+	  it "should not allow updating a coupon with hidden unset" do
+	    id = FactoryGirl.create(:coupon, :merchant => merchant)
+	    patch :update, :id => id, :coupon => FactoryGirl.build(:coupon_with_unset_hidden, :merchant => merchant).as_json
 		expect(response.status).to eq(422)
 	  end
 	

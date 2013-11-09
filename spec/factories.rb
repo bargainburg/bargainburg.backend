@@ -10,6 +10,10 @@ FactoryGirl.define do
 
   factory :category do
     sequence (:name) {|n| "Category #{n}"}
+	
+	factory :category_with_no_name do
+	  name nil
+	end
 
     ignore do
       merchant_count 5
@@ -72,13 +76,38 @@ FactoryGirl.define do
 	  end_date 2.weeks.ago
 	  begin_date 2.weeks.from_now
 	end
+	factory :coupon_with_no_dates do
+	  end_date nil
+	  begin_date nil
+	end
+	factory :coupon_with_no_name do
+	  name nil
+	end
+	factory :coupon_with_no_category do
+	  category nil
+	end
+	factory :coupon_with_unset_hidden do
+	  hidden nil
+	end
   end
 
   factory :point_of_contact do
     sequence (:name) {|n| "POC #{n}"}
     phone "(123) 555-5555"
     email "POC Email"
-    merchant
+	merchant
+	
+	factory :poc_no_name do
+	  name nil
+	end
+	
+	factory :poc_no_phone do
+	  phone nil
+	end
+	
+	factory :poc_no_email do
+	  email nil
+	end
   end
 
 
