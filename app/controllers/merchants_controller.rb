@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource
 
   # GET /merchants
   # GET /merchants.json
@@ -31,13 +31,6 @@ class MerchantsController < ApplicationController
   # POST /merchants
   # POST /merchants.json
   def create
-	if @merchant.save
-		render json: @merchant, status: :created, location: @merchant
-	else
-		render json: @merchant.errors, status: :unprocessable_entity
-	end
-   end
-	
     # TODO fix until strong params
     @merchant.approved = false
 
@@ -51,12 +44,6 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
-	if @merchant.update(params[:merchant])
-		head :no_content
-	else
-		render json: @merchant.errors, status: :unprocessable_entity
-	 end
-   end
     # TODO fix until strong params
     params[:merchant].delete :approved
 
