@@ -7,7 +7,7 @@ class CouponsController < ApplicationController
     if params[:merchant_id].present?
       @merchant = Merchant.find(params[:merchant_id])
       authorize! :read, @merchant
-      @coupons = @merchant.coupons.accessible_by(current_ability)
+      @coupons = @merchant.coupons.accessible_by(current_ability).order("name ASC")
     end
 
     render json: @coupons, callback: params[:callback]
