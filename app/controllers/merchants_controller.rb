@@ -31,7 +31,6 @@ class MerchantsController < ApplicationController
   # POST /merchants
   # POST /merchants.json
   def create
-<<<<<<< HEAD
 	if @merchant.save
 		render json: @merchant, status: :created, location: @merchant
 	else
@@ -39,7 +38,6 @@ class MerchantsController < ApplicationController
 	end
    end
 	
-=======
     # TODO fix until strong params
     @merchant.approved = false
 
@@ -49,20 +47,16 @@ class MerchantsController < ApplicationController
       render json: @merchant.errors, status: :unprocessable_entity
     end
   end
->>>>>>> 523cb0ab82c03947e333e12737c9393041a0bf61
 
   # PATCH/PUT /merchants/1
   # PATCH/PUT /merchants/1.json
   def update
-<<<<<<< HEAD
-	
 	if @merchant.update(params[:merchant])
 		head :no_content
 	else
 		render json: @merchant.errors, status: :unprocessable_entity
 	 end
    end
-=======
     # TODO fix until strong params
     params[:merchant].delete :approved
 
@@ -72,7 +66,6 @@ class MerchantsController < ApplicationController
       render json: @merchant.errors, status: :unprocessable_entity
     end
   end
->>>>>>> 523cb0ab82c03947e333e12737c9393041a0bf61
 
   # DELETE /merchants/1
   # DELETE /merchants/1.json
