@@ -51,11 +51,11 @@ namespace :deploy do
   end
 
   task :symlink_directories do
-    run "ln -nfs #{shared_path}/coupons #{release_path}/public/coupons"
+    execute "ln -nfs #{shared_path}/coupons #{release_path}/public/coupons"
   end
 
   task :symlink_setup do
-    run "mkdir -p #{shared_path}/coupons"
+    execute "mkdir -p #{shared_path}/coupons"
   end
 
   before "deploy:restart", "deploy:symlink_directories"
