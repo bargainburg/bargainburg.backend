@@ -27,12 +27,12 @@ namespace :deploy do
   end
 
   #after :restart, :clear_cache do
-    #on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    #end
+  #on roles(:web), in: :groups, limit: 3, wait: 10 do
+  # Here we can do anything such as:
+  # within release_path do
+  #   execute :rake, 'cache:clear'
+  # end
+  #end
   #end
 
   # copy database.yml into project
@@ -51,11 +51,15 @@ namespace :deploy do
   end
 
   task :symlink_directories do
-    execute "ln -nfs #{shared_path}/coupons #{release_path}/public/coupons"
+    on roles(:app) do
+      execute "ln -nfs #{shared_path}/coupons #{release_path}/public/coupons"
+    end
   end
 
   task :symlink_setup do
-    execute "mkdir -p #{shared_path}/coupons"
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/coupons"
+    end
   end
 
   before "deploy:restart", "deploy:symlink_directories"
