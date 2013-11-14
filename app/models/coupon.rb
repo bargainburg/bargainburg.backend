@@ -3,7 +3,9 @@ class Coupon < ActiveRecord::Base
 	belongs_to :category
 
    #attr_accessible :image
-   has_attached_file :image, :url => "coupons/:id/:basename.:extension"
+   has_attached_file :image, 
+                     :url => "/coupons/:id/:basename.:extension",
+                     :path => ":rails_root/public/coupons/:id/:basename.:extension"  
    validates_attachment_content_type :image, 
 	    :content_type => [ 'image/jpg', 'image/png', 'image/jpeg' ], 
 	    :message => "File must be of type jpg or png"
