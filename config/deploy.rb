@@ -50,8 +50,18 @@ namespace :deploy do
     end
   end
 
+  task :symlink_directories do
+    run "ln -nfs #{shared_path}/coupons #{release_path}/public/coupons"
+  end
+
+  task :symlink_setup do
+    run "mkdir -p #{shared_path}/coupons"
+  end
+
+  before "deploy:restart", "deploy:symlink_directories"
   before "deploy:restart", "deploy:copy_database_config"
   before "deploy:restart", "deploy:create_tmp"
+  before "deploy:symlink_directories", "deploy:symlink_setup"
   after :finishing, 'deploy:cleanup'
 
 end
