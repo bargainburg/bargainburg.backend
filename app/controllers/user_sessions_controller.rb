@@ -6,7 +6,11 @@ class UserSessionsController < ApplicationController
                                     :password => params[:password],
                                     :remember_me => params[:remember_me])
     if @user_session.save
-      render json: {:user_id => @user_session.user.id, :merchant_id => @user_session.user.merchant.id}, callback: params[:callback]
+      if @user_session.user.merchant
+        render json: {:user_id => @user_session.user.id, :merchant_id => @user_session.user.merchant.id}, callback: params[:callback]
+      else
+        render json: {:user_id => @user_session.user.id}, callback: params[:callback]
+      end
     else
       head :bad_request
     end
