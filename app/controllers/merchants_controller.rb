@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :create
 
   # GET /merchants
   # GET /merchants.json
@@ -32,9 +32,9 @@ class MerchantsController < ApplicationController
   # POST /merchants.json
   def create
     # TODO fix until strong params
-    @merchant.approved = false
+    #@merchant.approved = false
 
-    if @merchant.save
+    if Merchant.create(merchant_params)
       render json: @merchant, status: :created, location: @merchant
     else
       render json: @merchant.errors, status: :unprocessable_entity
@@ -45,9 +45,9 @@ class MerchantsController < ApplicationController
   # PATCH/PUT /merchants/1.json
   def update
     # TODO fix until strong params
-    params[:merchant].delete :approved
+    #params[:merchant].delete :approved
 
-    if @merchant.update(params[:merchant])
+    if @merchant.update(merchant_params])
       head :no_content
     else
       render json: @merchant.errors, status: :unprocessable_entity
@@ -60,4 +60,8 @@ class MerchantsController < ApplicationController
     @merchant.destroy
     head :no_content
   end
+  private
+ 	def merchant_params
+		params.require(:merchant).permit(:name, :email, :phone, :hours, :link, :description, :address)
+	end
 end

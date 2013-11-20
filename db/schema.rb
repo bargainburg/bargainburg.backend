@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131014205503) do
+ActiveRecord::Schema.define(version: 20131120154055) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20131014205503) do
     t.integer  "category_id"
     t.integer  "user_id"
     t.string   "address"
+    t.string   "image_name"
+    t.integer  "image_size"
   end
 
   add_index "merchants", ["user_id"], name: "index_merchants_on_user_id"
@@ -60,11 +62,6 @@ ActiveRecord::Schema.define(version: 20131014205503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "merchant_id"
-  end
-
-  create_table "searches", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
