@@ -58,11 +58,16 @@ GEM
     bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.1.4)
     cancan (1.6.10)
+      activesupport (>= 3.0)
     capistrano (3.0.0)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
-    celluloid (0.15.2)
+    capistrano-bundler (1.0.0)
+      capistrano (>= 3.0.0.pre)
+    capistrano-rails (1.0.0)
+      capistrano
+    celluloid (0.15.1)
       timers (~> 1.1.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -213,6 +218,8 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   cancan
   capistrano
+  capistrano-bundler
+  capistrano-rails
   factory_girl_rails
   faker
   fuubar (~> 1.2.1)

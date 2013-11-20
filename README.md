@@ -22,8 +22,8 @@ Backend services and REST API
     * GET - returns all of the coupons for a merchant
 * /v1/merchants/:merchant\_id/point\_of\_contacts(.:format)
     * GET - return all of the points of contact for a merchant
-* /v1/merchants(.:format)(?expand_coupons=1)
-    * GET - return all fo the merchants, if expand_coupons is set then an array of the coupon ids and names will be returned within reach merchant
+* /v1/merchants(.:format)(?expand\_coupons=1)
+    * GET - return all fo the merchants, if expand\_coupons is set then an array of the coupon ids and names will be returned within reach merchant
     * POST - create a merchant
 * /v1/merchants/:id(.:format)(?(only\_names=1|category\_id=cat\_id))
     * GET - return a single merchant. If only\_names is set then only the
@@ -36,12 +36,20 @@ Backend services and REST API
 * /v1/coupons/:id(.:format)
     * GET - return a single coupon
     * PUT - update a coupon's fields
+* /v1/users
+    * POST - create a user
 * /v1/search(.:format)?query=StringToSearchFor
     * GET - return results of search in query parameter
 * /v1/login(.:format)
     * POST - login as given user 
 * /v1/logout(.:format)
     * POST - logout as current user
+
+##Tips and tricks
+* When images are uploaded with a coupon they are reachable at "URL/coupons/ID/FILENAME". Notice that there is no /v1/
+* When POSTing or PUTing data to the API make sure to wrap the fields in the correct type. Ex. {"coupon":{"merchant\_id":5, "another\_field":"value"}}
+* All fields can be found in the file db/schema.rb
+* Validations for those fields are in app/models/OBJECT
 
 
 ##Testing
