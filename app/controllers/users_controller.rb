@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  skip_authorization_check
 
   # POST /users
   def create
+    current_user_session.destroy
+    @user = User.new(params[:user])
+
     if @user.save
       render json: @user, status: :created
     else
