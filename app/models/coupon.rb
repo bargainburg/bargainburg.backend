@@ -3,12 +3,15 @@ class Coupon < ActiveRecord::Base
 	belongs_to :category
 
    #attr_accessible :image
-   has_attached_file :image, :url => "coupons/:id/:basename.:extension"
+   has_attached_file :image, 
+                     :url => "/coupons/:id/:basename.:extension",
+                     :path => ":rails_root/public/coupons/:id/:basename.:extension"  
    validates_attachment_content_type :image, 
-	    :content_type => [ 'image/jpg', 'image/png' ], 
+	    :content_type => [ 'image/jpg', 'image/png', 'image/jpeg' ], 
 	    :message => "File must be of type jpg or png"
    validates_attachment_size :image, :less_than => 2.megabytes
-   validates_presence_of [:begin_date, :end_date, :hidden, :name, :category_id, :merchant_id]
+   validates_presence_of [:begin_date, :end_date, :name, :category_id, :merchant_id]
+   validates_inclusion_of :hidden, :in => [true, false] 
    validate :validate_end_after_start
    
    def validate_end_after_start

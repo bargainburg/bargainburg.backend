@@ -4,6 +4,6 @@ class Merchant < ActiveRecord::Base
 	has_many :PointOfContact
   belongs_to :user
 
-  validates_presence_of [:name, :phone, :price_range, :category_id]
+  validates_presence_of [:name, :phone, :price_range, :category_id, :user_id]
   
 end
