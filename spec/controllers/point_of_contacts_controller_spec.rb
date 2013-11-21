@@ -4,6 +4,13 @@ describe PointOfContactsController do
   setup :activate_authlogic
   
   context "anonymous user" do
+	describe "#show" do
+	  it "should render a valid point of contact" do
+	    get :show, :id => FactoryGirl.create(:point_of_contact)
+        expect(response.status).to eq(200)
+	  end
+	end
+  
 	describe "#create, #update" do
 	  it "shouldn't authorize #create" do
         post :create, :point_of_contact => FactoryGirl.build(:point_of_contact).as_json
@@ -24,6 +31,13 @@ describe PointOfContactsController do
     setup do
       log_in user
     end
+	
+	describe "#show" do
+	  it "should render a valid point of contact" do
+	    get :show, :id => FactoryGirl.create(:point_of_contact)
+        expect(response.status).to eq(200)
+	  end
+	end
 	
 	describe "#create" do
 	  it "shouldn't allow the creation of a point of contact with no name" do
