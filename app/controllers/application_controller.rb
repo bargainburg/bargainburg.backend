@@ -1,11 +1,20 @@
 class ApplicationController < ActionController::API
-
   include ActionController::Cookies
   include CanCan::ControllerAdditions
 
-  check_authorization
+  check_authorization :unless => :options_check
 
   helper_method :current_user_session, :current_user
+
+  def options_check
+    #Render and Redirect both cause AbstractController::DoubleRenderError
+    #render :text => '', :content_type => 'text/plain' 
+    #redirect_to request.original_url
+
+    #method must do something or CanCan::AuthorizationNotPerformed
+    #on cross_origin_allow_admin
+    p "options_check called"
+  end
 
   private
 

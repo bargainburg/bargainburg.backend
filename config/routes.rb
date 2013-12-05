@@ -1,6 +1,7 @@
 Api::Application.routes.draw do
 
   scope '/v1' do
+    match '/*path' => 'application#options_check', via: [:options]
     resources :categories, except: [:new, :edit, :destroy] do
       resources :merchants, only: [:index]
     end
