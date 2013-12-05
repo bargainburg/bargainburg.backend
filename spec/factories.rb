@@ -10,6 +10,10 @@ FactoryGirl.define do
 
   factory :category do
     sequence (:name) {|n| "Category #{n}"}
+	
+	factory :category_with_no_name do
+	  name nil
+	end
 
     ignore do
       merchant_count 5
@@ -22,6 +26,7 @@ FactoryGirl.define do
 
   factory :merchant do
     sequence (:name) {|n| "Merchant #{n}"}
+	phone "801-383-9781"
     description "Description of Merchant"
     price_range 3
     approved true
@@ -37,12 +42,12 @@ FactoryGirl.define do
     end
   end
 
-  factory :coupon do
+  factory :coupon do	
     sequence (:name) {|n| "Coupon #{n}"}
     description "Coupon Description"
     begin_date 1.month.ago
     end_date 1.month.from_now
-    hidden false
+	hidden false
     merchant
     category
 
@@ -56,15 +61,53 @@ FactoryGirl.define do
       begin_date 2.weeks.from_now
     end
     factory :hidden_coupon do
-      hidden true
+		hidden true
     end
+	factory :coupon_with_valid_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/harry_potter.jpg', 'image/jpg')}
+	end
+	factory :coupon_with_invalid_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/Spongebob.gif', 'image/gif')}
+	end
+	factory :coupon_with_large_image do
+	  image {fixture_file_upload(Rails.root + 'spec/fixtures/images/aerial.jpg', 'image/jpg')}
+	end
+	factory :coupon_with_invalid_dates do
+	  end_date 2.weeks.ago
+	  begin_date 2.weeks.from_now
+	end
+	factory :coupon_with_no_dates do
+	  end_date nil
+	  begin_date nil
+	end
+	factory :coupon_with_no_name do
+	  name nil
+	end
+	factory :coupon_with_no_category do
+	  category nil
+	end
+	factory :coupon_with_unset_hidden do
+	  hidden nil
+	end
   end
 
   factory :point_of_contact do
     sequence (:name) {|n| "POC #{n}"}
     phone "(123) 555-5555"
     email "POC Email"
-    merchant
+	merchant
+	
+	factory :poc_no_name do
+	  name nil
+	end
+	
+	factory :poc_no_phone do
+	  phone nil
+	end
+	
+	factory :poc_no_email do
+	  email nil
+	end
   end
 
 
